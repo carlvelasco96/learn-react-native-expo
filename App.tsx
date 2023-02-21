@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StyleSheet, View, FlatList, Button } from "react-native";
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -32,34 +33,37 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appCountainer}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      <GoalInput
-        onAddGoal={addGoalHandler}
-        isVisible={modalIsVisible}
-        onEndAddGoal={endAddGoalHandler}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                id={itemData.item.id}
-                onDeleteGoal={deleteGoalHandler}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => item.id}
-          alwaysBounceVertical={false}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appCountainer}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={startAddGoalHandler}
         />
+        <GoalInput
+          onAddGoal={addGoalHandler}
+          isVisible={modalIsVisible}
+          onEndAddGoal={endAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  id={itemData.item.id}
+                  onDeleteGoal={deleteGoalHandler}
+                />
+              );
+            }}
+            keyExtractor={(item, index) => item.id}
+            alwaysBounceVertical={false}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
