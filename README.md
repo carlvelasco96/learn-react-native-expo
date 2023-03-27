@@ -1,4 +1,4 @@
-# My React Native Expo App
+# Learn: Beginner React Native Expo App
 
 ## Description
 
